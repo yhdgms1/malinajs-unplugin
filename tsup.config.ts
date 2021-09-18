@@ -1,11 +1,9 @@
-import { Options } from 'tsup'
+import { Options } from "tsup";
 
 export default <Options>{
-  entryPoints: [
-    'src/*.ts',
-  ],
+  entryPoints: ["src/index.ts"],
   clean: true,
-  format: ['cjs', 'esm'],
+  format: ["cjs", "esm"],
   dts: true,
-  onSuccess: 'npm run build:fix',
-}
+  external: ["malinajs", "malinajs/runtime"],
+};
