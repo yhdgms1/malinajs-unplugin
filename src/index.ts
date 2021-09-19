@@ -32,7 +32,7 @@ export const unplugin = createUnplugin<Options>((options) => {
         let result = ctx.result;
 
         if (ctx?.css?.result) {
-          const name = id.replace(/[^\w.\\-]/g, "") + ".css";
+          const name = id.replace(/[^\w.\\-]/g, "") + ".malina.css";
 
           content_cache[name] = ctx.css.result;
 
@@ -40,9 +40,14 @@ export const unplugin = createUnplugin<Options>((options) => {
         }
 
         return result;
-      } catch (error: any) {
-        if (error?.details && !options?.warning) console.log(error?.details);
-        if (error?.details && options?.warning) options.warning(error?.details);
+      } catch (error: unknown) {
+        if (options?.warning) {
+          if (typeof error === "string") {
+            options.warning(error);
+          } else if (error instanceof Error) {
+            options.warning(error.message);
+          }
+        }
 
         throw error;
       }
