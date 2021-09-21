@@ -1,6 +1,6 @@
 {
   "name": "malinajs-unplugin",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Transform Malina.js files to plain js",
   "type": "module",
   "keywords": [
@@ -37,11 +37,12 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "fast-glob": "^3.2.7",
     "unplugin": "^0.2.11"
   },
   "devDependencies": {
-    "@types/node": "^16.9.2",
-    "malinajs": "^0.6.42",
+    "@types/node": "^16.9.4",
+    "malinajs": "^0.6.43",
     "prettier": "^2.4.1",
     "tsup": "^5.1.0",
     "typescript": "^4.4.3"

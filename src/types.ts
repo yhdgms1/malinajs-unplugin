@@ -5,6 +5,18 @@ export interface Options {
    */
   extensions?: string[];
   /**
+   * Exclude globs
+   *
+   * @default []
+   */
+  exclude?: string[];
+  /**
+   * Include globs
+   *
+   * @default []
+   */
+  include?: string[];
+  /**
    * controls how to handle CSS, true - adds css to JS bundle, false - into outside css file, function - intercepts css for manual handling
    * @default true
    */
@@ -61,6 +73,7 @@ export interface Options {
   warning?: (warn: string) => void;
   /**
    * Show annoying message with version of Malina.js
+   * @default false
    */
   displayVersion?: boolean;
 }

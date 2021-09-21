@@ -2,6 +2,8 @@ import type { Options } from "./types";
 
 import { createUnplugin } from "unplugin";
 import malina from "malinajs";
+import fastGlob from "fast-glob";
+const { sync: fg } = fastGlob;
 
 export const unplugin = createUnplugin<Options>((options) => {
   if (!options) options = {};
@@ -15,9 +17,22 @@ export const unplugin = createUnplugin<Options>((options) => {
   return {
     name: "malinajs",
     transformInclude(id) {
-      return options!.extensions!.some((extension) =>
+      const extensionMatches = options!.extensions!.some((extension) =>
         id.endsWith("." + extension)
       );
+
+      if (!options?.include && !options?.exclude) {
+        return extensionMatches;
+      }
+
+      const files = fg(options.include || [], {
+        cwd: process.cwd(),
+        ignore: options.exclude || [],
+        onlyFiles: true,
+        absolute: true,
+      });
+
+      return files.includes(id) || extensionMatches;
     },
     async transform(code, id) {
       const compileOptions = {
