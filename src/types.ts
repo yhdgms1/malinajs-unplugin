@@ -1,3 +1,8 @@
+export interface MalinaPlugin {
+  name: string;
+  dom: (ctx: any) => Promise<void>;
+}
+
 export interface Options {
   /**
    * By default, all ".xht" and ".ma" files are compiled
@@ -76,4 +81,9 @@ export interface Options {
    * @default false
    */
   displayVersion?: boolean;
+  /**
+   * Malina.js plugins
+   * @default []
+   */
+  plugins?: MalinaPlugin[];
 }

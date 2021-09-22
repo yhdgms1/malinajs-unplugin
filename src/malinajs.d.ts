@@ -1,3 +1,5 @@
+type MalinaPlugin = import("./types").MalinaPlugin;
+
 interface Config {
   name?: string;
   exportDefault?: boolean;
@@ -6,7 +8,7 @@ interface Config {
   compact?: boolean;
   autoSubscribe?: boolean;
   cssGenId?: () => string;
-  plugins?: [];
+  plugins?: MalinaPlugin[];
   debug?: boolean;
   css?: boolean | ((css: string, path: string, ctx: any) => void);
   passClass?: boolean;
