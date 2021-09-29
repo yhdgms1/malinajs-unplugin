@@ -2,8 +2,7 @@ import type { Options } from "./types";
 
 import { createUnplugin } from "unplugin";
 import malina from "malinajs";
-import fastGlob from "fast-glob";
-const { sync: fg } = fastGlob;
+import picomatch from "picomatch";
 
 export const unplugin = createUnplugin<Options>((options) => {
   if (!options) options = {};
@@ -17,6 +16,10 @@ export const unplugin = createUnplugin<Options>((options) => {
   return {
     name: "malinajs",
     transformInclude(id) {
+      const isCss = id.endsWith(".malina.css");
+
+      if (isCss) return false;
+
       const extensionMatches = options!.extensions!.some((extension) =>
         id.endsWith("." + extension)
       );
@@ -25,14 +28,13 @@ export const unplugin = createUnplugin<Options>((options) => {
         return extensionMatches;
       }
 
-      const files = fg(options.include || [], {
+      const globMatches = picomatch.isMatch(id, options.include || [], {
         cwd: process.cwd(),
         ignore: options.exclude || [],
-        onlyFiles: true,
-        absolute: true,
+        contains: true,
       });
 
-      return files.includes(id) || extensionMatches;
+      return globMatches || extensionMatches;
     },
     async transform(code, id) {
       const compileOptions = {

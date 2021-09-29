@@ -29,3 +29,7 @@ module.exports = {
   plugins: [malinaPlugin()],
 };
 ```
+
+## Caution
+
+Be careful when using with Vite: the `html` extension will not work
