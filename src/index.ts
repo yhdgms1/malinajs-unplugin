@@ -16,10 +16,6 @@ export const unplugin = createUnplugin<Options>((options) => {
   return {
     name: "malinajs",
     transformInclude(id) {
-      const isCss = id.endsWith(".malina.css");
-
-      if (isCss) return false;
-
       const extensionMatches = options!.extensions!.some((extension) =>
         id.endsWith("." + extension)
       );
@@ -40,7 +36,7 @@ export const unplugin = createUnplugin<Options>((options) => {
       const compileOptions = {
         ...options,
         path: id,
-        name: id.match(/([^\/\\]+)\.\w+$/)![1],
+        name: id.match(/([^/\\]+)\.\w+$/)![1],
       };
 
       try {
@@ -48,8 +44,10 @@ export const unplugin = createUnplugin<Options>((options) => {
 
         let result = ctx.result;
 
-        if (ctx?.css?.result) {
-          const name = id.replace(/[^\w.\\-]/g, "") + ".malina.css";
+        if (options?.css === false && ctx?.css?.result) {
+          const name =
+            id.replace(/[^\w.\\-]/g, "").replace(/(\.\w+)+/, "") +
+            ".malina.css";
 
           content_cache[name] = ctx.css.result;
 

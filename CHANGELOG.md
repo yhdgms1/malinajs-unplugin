@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.6
+
+Changed: Better CSS handling (Regexes are stolen from [Malina's esbuild plugin](https://github.com/malinajs/malinajs/blob/master/malina-esbuild.js))
+
 ## 0.0.5
 
 Changed: `fast-glob` replaced with `picomatch`
