@@ -1,5 +1,7 @@
 # malinajs-unplugin
 
+[![install size](https://packagephobia.com/badge?p=malinajs-unplugin@latest)](https://packagephobia.com/result?p=malinajs-unplugin@latest)
+
 ## Usage
 
 ### Vite
