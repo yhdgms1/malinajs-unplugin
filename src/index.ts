@@ -11,7 +11,7 @@ export const unplugin = createUnplugin<Options>((options) => {
 
   if (options.displayVersion) console.log("! Malina.js", malina.version);
 
-  let content_cache: { [key: string]: string } = {};
+  const cssMap = new Map<string, string>();
 
   return {
     name: "malinajs",
@@ -49,7 +49,7 @@ export const unplugin = createUnplugin<Options>((options) => {
             id.replace(/[^\w.\\-]/g, "").replace(/(\.\w+)+/, "") +
             ".malina.css";
 
-          content_cache[name] = ctx.css.result;
+          cssMap.set(name, ctx.css.result);
 
           result += `\nimport "${name}";\n`;
         }
@@ -68,14 +68,14 @@ export const unplugin = createUnplugin<Options>((options) => {
       }
     },
     async resolveId(name) {
-      if (content_cache[name]) return name;
+      if (cssMap.has(name)) return name;
 
       if (name === "malinajs") return await require("malinajs/runtime");
 
       return null;
     },
     load(id) {
-      return content_cache[id] || null;
+      return cssMap.has(id) ? cssMap.get(id) : null;
     },
   };
 });
