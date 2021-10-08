@@ -1,6 +1,6 @@
 {
   "name": "malinajs-unplugin",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Transform Malina.js files to plain js",
   "type": "module",
   "keywords": [
