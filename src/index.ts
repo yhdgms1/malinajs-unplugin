@@ -67,10 +67,8 @@ export const unplugin = createUnplugin<Options>((options) => {
         throw error;
       }
     },
-    async resolveId(name) {
+    resolveId(name) {
       if (cssMap.has(name)) return name;
-
-      if (name === "malinajs") return await require("malinajs/runtime");
 
       return null;
     },
