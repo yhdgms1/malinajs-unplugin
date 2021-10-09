@@ -1,3 +1,5 @@
+type Glob = import("picomatch").Glob;
+
 export interface MalinaPlugin {
   name: string;
   dom: (ctx: any) => Promise<void>;
@@ -14,13 +16,13 @@ export interface Options {
    *
    * @default []
    */
-  exclude?: string[];
+  exclude?: Glob;
   /**
    * Include globs
    *
    * @default []
    */
-  include?: string[];
+  include?: Glob;
   /**
    * controls how to handle CSS, true - adds css to JS bundle, false - into outside css file, function - intercepts css for manual handling
    * @default true

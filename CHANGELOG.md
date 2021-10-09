@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.8
+
+Changed: Better Glob types
+
 ## 0.0.7
 
 Changed: Object with CSS replaced by Map. [commit](https://github.com/Artemis69/malinajs-unplugin/commit/f64c820f46583d7cc51fc78ed6e3533dcce089f4)

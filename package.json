@@ -1,6 +1,6 @@
 {
   "name": "malinajs-unplugin",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Transform Malina.js files to plain js",
   "type": "module",
   "keywords": [
@@ -42,10 +42,10 @@
   },
   "devDependencies": {
     "@types/node": "^16.9.4",
-    "@types/picomatch": "^2.2.6",
-    "malinajs": "^0.6.43",
+    "@types/picomatch": "^2.3.0",
+    "malinajs": "^0.6.45",
     "prettier": "^2.4.1",
-    "tsup": "^5.2.1",
+    "tsup": "^5.4.0",
     "typescript": "^4.4.3"
   },
   "peerDependencies": {
