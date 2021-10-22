@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.9
+
+Fixed: Glob type is any
+
 ## 0.0.8
 
 Changed: Better Glob types

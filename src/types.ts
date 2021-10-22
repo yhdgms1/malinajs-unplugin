@@ -1,4 +1,4 @@
-type Glob = import("picomatch").Glob;
+type Glob = string | string[]
 
 export interface MalinaPlugin {
   name: string;
