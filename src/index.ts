@@ -1,4 +1,4 @@
-import type { Options } from "./types";
+import type { Options, MalinaPlugin } from "./types";
 
 import { createUnplugin } from "unplugin";
 import malina from "malinajs";
@@ -81,3 +81,5 @@ export const unplugin = createUnplugin<Options>((options) => {
 export const vitePlugin = unplugin.vite;
 export const rollupPlugin = unplugin.rollup;
 export const webpackPlugin = unplugin.webpack;
+
+export { Options, MalinaPlugin };

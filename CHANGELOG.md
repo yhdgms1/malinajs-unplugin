@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.0.10
+
+Changed: Better Plugin Types
+
+Use it like:
+
+```ts
+import type { MalinaPlugin } from "malinajs-unplugin";
+
+export const myMalinaPlugin: MalinaPlugin = {
+  name: "my-malina-plugin",
+  // ... other plugin properties
+};
+```
+
 ## 0.0.9
 
 Fixed: Glob type is any

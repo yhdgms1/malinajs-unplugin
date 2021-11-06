@@ -1,8 +1,25 @@
-type Glob = string | string[]
+type Glob = string | string[];
+type Thenable<T> = T | Promise<T>;
+
+type MalinaPLuginHookResult = Thenable<void>;
+type MalinaPLuginHook = (ctx: any) => MalinaPLuginHookResult;
 
 export interface MalinaPlugin {
   name: string;
-  dom: (ctx: any) => Promise<void>;
+  "dom:before"?: MalinaPLuginHook;
+  dom?: MalinaPLuginHook;
+  "dom:check"?: MalinaPLuginHook;
+  "dom:compact"?: MalinaPLuginHook;
+  "dom:after"?: MalinaPLuginHook;
+  "js:before"?: MalinaPLuginHook;
+  js?: MalinaPLuginHook;
+  "js:after"?: MalinaPLuginHook;
+  "css:before"?: MalinaPLuginHook;
+  css?: MalinaPLuginHook;
+  "runtime:before"?: MalinaPLuginHook;
+  runtime?: MalinaPLuginHook;
+  "build:before"?: MalinaPLuginHook;
+  build?: MalinaPLuginHook;
 }
 
 export interface Options {
