@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.11
+
+Changed: Additional check was removed
+
 ## 0.0.10
 
 Changed: Better Plugin Types

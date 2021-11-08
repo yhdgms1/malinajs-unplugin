@@ -44,7 +44,7 @@ export const unplugin = createUnplugin<Options>((options) => {
 
         let result = ctx.result;
 
-        if (options?.css === false && ctx?.css?.result) {
+        if (ctx?.css?.result) {
           const name =
             id.replace(/[^\w.\\-]/g, "").replace(/(\.\w+)+/, "") +
             ".malina.css";
