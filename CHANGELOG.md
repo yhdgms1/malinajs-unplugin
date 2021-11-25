@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.0.13
+
+Fixed: 'autoimport' type now a more complete
+
+Changed: All descriptions in jsdoc now start with a capital letter
+
+Changed: 'unplugin' bumped to `0.2.21`
+
 ## 0.0.11
 
 Changed: Additional check was removed

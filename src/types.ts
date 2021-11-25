@@ -41,58 +41,60 @@ export interface Options {
    */
   include?: Glob;
   /**
-   * controls how to handle CSS, true - adds css to JS bundle, false - into outside css file, function - intercepts css for manual handling
+   * Controls how to handle CSS, true - adds css to JS bundle, false - into outside css file, function - intercepts css for manual handling
    * @default true
    */
   css?: boolean | ((css: string, path: string, ctx: any) => void);
   /**
-   * convert new line to \n
+   * Convert new line to \n
    * @default false
    */
   inlineTemplate?: boolean;
   /**
-   * hide comment tags (labels) from DOM
+   * Hide comment tags (labels) from DOM
    * @default false
    */
   hideLabel?: boolean;
   /**
-   * remove spaces between DOM elements
+   * Remove spaces between DOM elements
    * @default true
    */
   compact?: boolean;
   /**
-   * autosubscribe imported stores
+   * Autosubscribe imported stores
    * @default true
    */
   autoSubscribe?: boolean;
   /**
    *
-   * generate hash for css classes
+   * Generate hash for css classes
    * @example () => `amogus-${hash(this.name)}`
    */
   cssGenId?: () => string;
   /**
-   * adds info label nodes
+   * Adds info label nodes
    * @default false
    */
   debugLabel?: boolean;
   /**
-   * passing classes to child component
+   * Passing classes to child component
    * @default true
    */
   passClass?: boolean;
   /**
-   * if true it doesn't perform deep comparison of objects
+   * If true it doesn't perform deep comparison of objects
    * @default false
    */
   immutable?: boolean;
   /**
-   * a function to handle missed components
-   * @example (name) => "import ${name} from './${name}.xht';";
+   * A function to handle missed components
+   * @example (name) => `import ${name} from './${name}.xht';`
+   * @param {string} name A name of imported component
+   * @param {string} path A path to component, in which import should be resolved
    */
-  autoimport?: (name: string) => string;
+  autoimport?: (name: string, path: string, ctx: any) => string;
   /**
-   * function to receive warnings
+   * Function to receive warnings
    */
   warning?: (warn: string) => void;
   /**
