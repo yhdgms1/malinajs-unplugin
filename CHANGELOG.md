@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.14
+
+Fixed: added missed 'exportDefault' property
+
 ## 0.0.13
 
 Fixed: 'autoimport' type now a more complete

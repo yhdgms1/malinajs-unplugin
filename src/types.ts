@@ -24,6 +24,11 @@ export interface MalinaPlugin {
 
 export interface Options {
   /**
+   * Use default export for component
+   * @default true
+   */
+  exportDefault?: boolean
+  /**
    * By default, all ".xht" and ".ma" files are compiled
    * @default ['ma', 'xht']
    */
@@ -44,7 +49,7 @@ export interface Options {
    * Controls how to handle CSS, true - adds css to JS bundle, false - into outside css file, function - intercepts css for manual handling
    * @default true
    */
-  css?: boolean | ((css: string, path: string, ctx: any) => void);
+  css?: boolean | ((css: string, path: string, _ctx: any, ctx: any) => void);
   /**
    * Convert new line to \n
    * @default false

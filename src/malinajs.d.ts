@@ -1,19 +1,5 @@
 type MalinaPlugin = import("./types").MalinaPlugin;
-
-interface Config {
-  name?: string;
-  exportDefault?: boolean;
-  inlineTemplate?: boolean;
-  hideLabel?: boolean;
-  compact?: boolean;
-  autoSubscribe?: boolean;
-  cssGenId?: () => string;
-  plugins?: MalinaPlugin[];
-  debug?: boolean;
-  css?: boolean | ((css: string, path: string, ctx: any) => void);
-  passClass?: boolean;
-  immutable?: boolean;
-}
+type Config = import("./types").Options;
 
 interface ContextConfig extends Config {
   path: string;
