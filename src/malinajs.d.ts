@@ -14,7 +14,7 @@ interface Context {
 }
 
 declare module "malinajs" {
-  export function compile(source: string, config: Config): Context;
+  export function compile(source: string, config: Config): Promise<Context>;
 
   export declare const version: string;
 }
