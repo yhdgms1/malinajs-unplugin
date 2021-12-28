@@ -1,10 +1,6 @@
 type MalinaPlugin = import("./types").MalinaPlugin;
 type Config = import("./types").Options;
 
-interface ContextConfig extends Config {
-  path: string;
-}
-
 interface ContextCSS {
   id: string;
   result?: string;
@@ -13,7 +9,7 @@ interface ContextCSS {
 interface Context {
   result: string;
   source: string;
-  config: ContextConfig;
+  config: Config;
   css?: ContextCSS;
 }
 

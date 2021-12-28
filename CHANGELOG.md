@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.15
+
+Fixed: added missed 'localConfig' property
+
 ## 0.0.14
 
 Fixed: added missed 'exportDefault' property

@@ -112,4 +112,15 @@ export interface Options {
    * @default []
    */
   plugins?: MalinaPlugin[];
+  /**
+   * If true, then if 'malina.config.js' file is found near the component, it will be used to extend options.
+   * 
+   * Will be used only if 'path' is passed
+   * @default null
+   */
+  localConfig?: boolean | null;
+  /**
+   * Path to a component
+   */
+  path?: string;
 }
