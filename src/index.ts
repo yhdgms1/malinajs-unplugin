@@ -1,13 +1,18 @@
 import type { Options, MalinaPlugin } from "./types";
 
 import { createUnplugin } from "unplugin";
-import malina from "malinajs";
+import { createRequire } from "module";
 import picomatch from "picomatch";
+import path from "path";
 
 export const unplugin = createUnplugin<Options>((options) => {
   if (!options) options = {};
 
   if (!options.extensions) options.extensions = ["ma", "xht"];
+
+  const malina = createRequire(import.meta.url)(
+    path.join(process.cwd(), "node_modules", "malinajs")
+  );
 
   if (options.displayVersion) console.log("! Malina.js", malina.version);
 
@@ -81,5 +86,7 @@ export const unplugin = createUnplugin<Options>((options) => {
 export const vitePlugin = unplugin.vite;
 export const rollupPlugin = unplugin.rollup;
 export const webpackPlugin = unplugin.webpack;
+export const esbuildPlugin = unplugin.esbuild;
+export default unplugin;
 
 export { Options, MalinaPlugin };

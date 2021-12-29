@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.0.16
+
+Changed: 'unplugin' bumped to `0.3.0`
+
+Added: 'esbuild' support
+
+### Oh, and... 
+
+While testing the new esbuild support, I found that it was not working because of `Cannot find module 'malinajs'` error.
+To fix this, I changed import to require, this is 'just works' and I'm not sure will it work in all cases.
+
+Currently, import inside the plugin looks like this:
+```ts
+const malina = createRequire(import.meta.url)(path.join(process.cwd(), "node_modules", "malinajs"));
+```
+
 ## 0.0.15
 
 Fixed: added missed 'localConfig' property
@@ -45,11 +61,11 @@ Changed: Better Glob types
 
 ## 0.0.7
 
-Changed: Object with CSS replaced by Map. [commit](https://github.com/Artemis69/malinajs-unplugin/commit/f64c820f46583d7cc51fc78ed6e3533dcce089f4)
+Changed: Object with CSS replaced by Map.
 
 ### BREAKING
 
-Changed: Direct `malinajs` import won't work anymore, read more in [Issue](https://github.com/Artemis69/malinajs-unplugin/issues/1). [commit](https://github.com/Artemis69/malinajs-unplugin/commit/6323694bdf5ec4ad6e65cdb0d1d4b9fa8585b2d7)
+Changed: Direct `malinajs` import won't work anymore, read more in [Issue](https://github.com/Artemis69/malinajs-unplugin/issues/1).
 
 ## 0.0.6
 

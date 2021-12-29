@@ -27,7 +27,7 @@ export interface Options {
    * Use default export for component
    * @default true
    */
-  exportDefault?: boolean
+  exportDefault?: boolean;
   /**
    * By default, all ".xht" and ".ma" files are compiled
    * @default ['ma', 'xht']
@@ -114,7 +114,7 @@ export interface Options {
   plugins?: MalinaPlugin[];
   /**
    * If true, then if 'malina.config.js' file is found near the component, it will be used to extend options.
-   * 
+   *
    * Will be used only if 'path' is passed
    * @default null
    */
