@@ -20,6 +20,7 @@ export const unplugin = createUnplugin<Options>((options) => {
 
   return {
     name: "malinajs",
+    enforce: "pre",
     transformInclude(id) {
       const extensionMatches = options!.extensions!.some((extension) =>
         id.endsWith("." + extension)

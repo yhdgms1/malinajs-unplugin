@@ -1,19 +1,26 @@
 # Changelog
 
+## 0.0.17
+
+Changed: `enforce` set to 'pre'
+
 ## 0.0.16
 
 Changed: 'unplugin' bumped to `0.3.0`
 
 Added: 'esbuild' support
 
-### Oh, and... 
+### Oh, and...
 
 While testing the new esbuild support, I found that it was not working because of `Cannot find module 'malinajs'` error.
 To fix this, I changed import to require, this is 'just works' and I'm not sure will it work in all cases.
 
 Currently, import inside the plugin looks like this:
+
 ```ts
-const malina = createRequire(import.meta.url)(path.join(process.cwd(), "node_modules", "malinajs"));
+const malina = createRequire(import.meta.url)(
+  path.join(process.cwd(), "node_modules", "malinajs")
+);
 ```
 
 ## 0.0.15
