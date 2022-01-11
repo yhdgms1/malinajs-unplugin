@@ -1,17 +1,8 @@
+import { Options } from "tsup";
+
 type MalinaPlugin = import("./types").MalinaPlugin;
 type Config = import("./types").Options;
-
-interface ContextCSS {
-  id: string;
-  result?: string;
-}
-
-interface Context {
-  result: string;
-  source: string;
-  config: Config;
-  css?: ContextCSS;
-}
+type Context = import("./types").Context;
 
 declare module "malinajs" {
   export function compile(source: string, config: Config): Promise<Context>;

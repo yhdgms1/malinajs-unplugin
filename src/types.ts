@@ -1,25 +1,279 @@
 type Glob = string | string[];
 type Thenable<T> = T | Promise<T>;
+type Modify<T, R> = Omit<T, keyof R> & R;
+type AcornNode = import("acorn").Node;
 
-type MalinaPLuginHookResult = Thenable<void>;
-type MalinaPLuginHook = (ctx: any) => MalinaPLuginHookResult;
+type MalinaPluginHookResult = Thenable<void>;
+type MalinaPluginHook<T> = (ctx: T) => MalinaPluginHookResult;
+
+export interface BaseContext {
+  /**
+   * The source code of the component
+   */
+  source: string;
+  /**
+   * The compiler's configuration
+   */
+  config: Options;
+  uniqIndex: number;
+  warning: (warn: string) => void;
+  Q: (str: string) => string;
+  inuse: Record<string, string | number>;
+  require: (...args: string[]) => void;
+  DOM: null;
+  compactDOM(): void;
+  buildBlock(data: any, option?: {}): any;
+  bindProp(prop: any, node: any, element: any, requireCD: any): any;
+  makeEachBlock(
+    data: any,
+    option: any
+  ): {
+    source: any;
+  };
+  makeifBlock(data: any, element: any, requireCD: any): any;
+  makeComponent(
+    node: any,
+    requireCD: any
+  ): {
+    bind: any;
+  };
+  makeComponentDyn(node: any, requireCD: any, element: any): any;
+  makeHtmlBlock(exp: any, label: any, requireCD: any): any;
+  makeAwaitBlock(node: any, element: any): any;
+  attachSlot(slotName: any, node: any, requireCD: any): any;
+  makeFragment(node: any, requireCD: any): any;
+  attachFragmentSlot(label: any, requireCD: any): any;
+  attachFragment(node: any): any;
+  attchExportedFragment(
+    node: any,
+    label: any,
+    componentName: any,
+    requireCD: any
+  ): any;
+  attachHead(n: any, requireCD: any): any;
+  inspectProp(prop: any): {
+    name: any;
+    value: any;
+    rawValue: any;
+    static: boolean;
+  };
+  attachPortal(node: any, requireCD: any): any;
+  makeEventProp(prop: any, requireElement: any): any;
+  glob: {
+    apply: any;
+    component: any;
+    componentFn: any;
+    rootCD: any;
+  };
+  module: {
+    top: any;
+    head: any;
+    code: any;
+    body: any;
+  };
+  checkRootName(name: string): void;
+  parseHTML(): void;
+  parseText: (source: string) => {
+    result: any[];
+    parts: {
+      value: string;
+      type: "js" | "text" | "exp";
+    }[];
+    staticText: string;
+  };
+  script: null;
+  scriptNodes: null;
+  js_parse(): void;
+  js_transform(): void;
+  js_build(): void;
+}
+
+interface ParserNode {
+  type: "node" | "script" | "template" | "style" | string;
+  name: string;
+  elArg: null;
+  openTag: string;
+  start: number;
+  end: number;
+  closedTag: string;
+  voidTag: boolean;
+  attributes: { content: string; name: string; value: string }[];
+  classes?: Set<any>;
+}
+
+interface ParserNodeScript
+  extends Modify<
+    Exclude<ParserNode, "classes">,
+    {
+      type: "script";
+      name: "script";
+    }
+  > {}
+
+interface ParserNodeStyle
+  extends Modify<
+    Exclude<ParserNode, "classes">,
+    {
+      type: "style";
+      name: "style";
+    }
+  > {}
+
+type ContextDomStageRootBody =
+  | {
+      type: "comment" | "template" | "text" | "systag";
+      content: string;
+    }
+  | {
+      type: "await";
+      value: string;
+      body: ContextDomStageRootBody[];
+      parts: {
+        main: ContextDomStageRootBody[];
+        mainValue: string;
+        then: ContextDomStageRootBody[];
+        thenValue: string;
+        catch: ContextDomStageRootBody[];
+        catchValue: string;
+      };
+    }
+  | {
+      type: "slot" | "fragment" | "each" | "if";
+      value: string;
+      body: ContextDomStageRootBody[];
+    }
+  | ParserNode
+  | ParserNodeScript
+  | ParserNodeStyle;
+
+export interface ContextDomStage extends BaseContext {
+  root: {
+    type: "root";
+    body: ContextDomStageRootBody[];
+  };
+}
+
+export interface ContextDomCheckStage
+  extends Modify<
+    BaseContext,
+    {
+      scriptNodes: ParserNodeScript[];
+      styleNodes: ParserNodeStyle[];
+    }
+  > {}
+
+export interface ContextDomCompactStage extends ContextDomCheckStage {}
+export interface ContextDomAfterStage extends ContextDomCompactStage {}
+export interface ContextJsBeforeStage extends ContextDomAfterStage {}
+export interface ContextJsStage
+  extends Modify<
+    ContextJsBeforeStage,
+    {
+      script: {
+        source: string;
+        watchers: string[];
+        imports: [];
+        importedNames: [];
+        props: [];
+        rootVariables: Record<string, boolean>;
+        rootFunctions: Record<string, boolean>;
+        readOnly: boolean;
+        autoimport: {};
+        ast: AcornNode;
+      };
+    }
+  > {}
+
+export interface ContextJsAfterStage
+  extends Modify<
+    ContextJsStage,
+    {
+      script: {
+        source: string;
+        watchers: string[];
+        rootVariables: Record<string, boolean>;
+        rootFunctions: Record<string, boolean>;
+        readOnly: boolean;
+        autoimport: {};
+        ast: AcornNode;
+        rootLevel: AcornNode[];
+        imports: [];
+        importedNames: string[];
+        onMount?: boolean;
+        onDestroy?: boolean;
+        props: [];
+      };
+    }
+  > {}
+
+export interface ContextCssBeforeStage extends ContextJsAfterStage {}
+
+export interface ContextCssStageResolveArguments {
+  cleanSelector: string;
+  isSimple: boolean;
+  source: unknown[];
+  fullyGlobal: boolean;
+  hashedSelectors: unknown[];
+  local: string;
+  $selector: boolean;
+  resolved: boolean;
+}
+
+export interface ContextCssStage
+  extends Modify<
+    ContextCssBeforeStage,
+    {
+      css: {
+        id: string;
+        externalMainName: null | string;
+        isExternalClass: (name: string) => boolean;
+        markAsExternal: (name: string) => void;
+        active: () => boolean;
+        containsExternal: () => boolean;
+        getClassMap: () => {
+          classMap: Record<string, string>;
+          metaClass: Record<string, string>;
+          main: null | string;
+        };
+        process: (data: ContextCssBeforeStage["DOM"]) => void;
+        resolve: (sel: ContextCssStageResolveArguments) => string;
+        getContent: () => string;
+      };
+    }
+  > {}
+
+export interface ContextRuntimeBeforeStage extends ContextCssStage {}
+export interface ContextRuntimeStage
+  extends Modify<ContextCssBeforeStage, {}> {}
+
+export interface ContextBuildBeforeStage
+  extends Modify<ContextRuntimeStage, {}> {}
+export interface ContextBuildStage
+  extends Modify<
+    ContextBuildBeforeStage,
+    {
+      result: string;
+    }
+  > {}
+
+export type Context = ContextBuildStage;
 
 export interface MalinaPlugin {
   name: string;
-  "dom:before"?: MalinaPLuginHook;
-  dom?: MalinaPLuginHook;
-  "dom:check"?: MalinaPLuginHook;
-  "dom:compact"?: MalinaPLuginHook;
-  "dom:after"?: MalinaPLuginHook;
-  "js:before"?: MalinaPLuginHook;
-  js?: MalinaPLuginHook;
-  "js:after"?: MalinaPLuginHook;
-  "css:before"?: MalinaPLuginHook;
-  css?: MalinaPLuginHook;
-  "runtime:before"?: MalinaPLuginHook;
-  runtime?: MalinaPLuginHook;
-  "build:before"?: MalinaPLuginHook;
-  build?: MalinaPLuginHook;
+  "dom:before"?: MalinaPluginHook<BaseContext>;
+  dom?: MalinaPluginHook<ContextDomStage>;
+  "dom:check"?: MalinaPluginHook<ContextDomCheckStage>;
+  "dom:compact"?: MalinaPluginHook<ContextDomCompactStage>;
+  "dom:after"?: MalinaPluginHook<ContextDomAfterStage>;
+  "js:before"?: MalinaPluginHook<ContextJsBeforeStage>;
+  js?: MalinaPluginHook<ContextJsStage>;
+  "js:after"?: MalinaPluginHook<ContextJsAfterStage>;
+  "css:before"?: MalinaPluginHook<ContextCssBeforeStage>;
+  css?: MalinaPluginHook<ContextCssStage>;
+  "runtime:before"?: MalinaPluginHook<ContextRuntimeBeforeStage>;
+  runtime?: MalinaPluginHook<ContextRuntimeStage>;
+  "build:before"?: MalinaPluginHook<ContextBuildBeforeStage>;
+  build?: MalinaPluginHook<ContextBuildStage>;
 }
 
 export interface Options {

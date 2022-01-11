@@ -4,6 +4,7 @@ importers:
 
   .:
     specifiers:
+      '@types/acorn': ^4.0.6
       '@types/node': ^16.9.4
       '@types/picomatch': ^2.3.0
       picomatch: ^2.3.0
@@ -15,6 +16,7 @@ importers:
       picomatch: 2.3.0
       unplugin: 0.3.0
     devDependencies:
+      '@types/acorn': 4.0.6
       '@types/node': 16.10.3
       '@types/picomatch': 2.3.0
       prettier: 2.5.1
@@ -54,6 +56,16 @@ packages:
 
   /@polka/url/1.0.0-next.17:
     resolution: {integrity: sha512-0p1rCgM3LLbAdwBnc7gqgnvjHg9KpbhcSphergHShlkWz8EdPawoMJ3/VbezI0mGC5eKCDzMaPgF9Yca6cKvrg==}
+    dev: true
+
+  /@types/acorn/4.0.6:
+    resolution: {integrity: sha512-veQTnWP+1D/xbxVrPC3zHnCZRjSrKfhbMUlEA43iMZLu7EsnTtkJklIuwrCPbOi8YkvDQAiW05VQQFvvz9oieQ==}
+    dependencies:
+      '@types/estree': 0.0.50
+    dev: true
+
+  /@types/estree/0.0.50:
+    resolution: {integrity: sha512-C6N5s2ZFtuZRj54k2/zyRhNDjJwwcViAM3Nbm8zjBpbqAdZ00mr0CFxvSKeO8Y/e03WVFLpQMdHYVfUd6SB+Hw==}
     dev: true
 
   /@types/node/16.10.3:
