@@ -90,4 +90,4 @@ export const webpackPlugin = unplugin.webpack;
 export const esbuildPlugin = unplugin.esbuild;
 export default unplugin;
 
-export { Options, MalinaPlugin };
+export * from "./types";

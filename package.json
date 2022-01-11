@@ -1,6 +1,6 @@
 {
   "name": "malinajs-unplugin",
-  "version": "0.0.17--context-dts.1",
+  "version": "0.0.17--context-dts.2",
   "description": "Transform Malina.js files to plain js",
   "type": "module",
   "keywords": [

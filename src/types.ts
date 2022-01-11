@@ -1,10 +1,10 @@
-type Glob = string | string[];
-type Thenable<T> = T | Promise<T>;
-type Modify<T, R> = Omit<T, keyof R> & R;
-type AcornNode = import("acorn").Node;
+export type Glob = string | string[];
+export type Thenable<T> = T | Promise<T>;
+export type Modify<T, R> = Omit<T, keyof R> & R;
+export type AcornNode = import("acorn").Node;
 
-type MalinaPluginHookResult = Thenable<void>;
-type MalinaPluginHook<T> = (ctx: T) => MalinaPluginHookResult;
+export type MalinaPluginHookResult = Thenable<void>;
+export type MalinaPluginHook<T> = (ctx: T) => MalinaPluginHookResult;
 
 export interface BaseContext {
   /**
@@ -88,7 +88,7 @@ export interface BaseContext {
   js_build(): void;
 }
 
-interface ParserNode {
+export interface ParserNode {
   type: "node" | "script" | "template" | "style" | string;
   name: string;
   elArg: null;
@@ -101,7 +101,7 @@ interface ParserNode {
   classes?: Set<any>;
 }
 
-interface ParserNodeScript
+export interface ParserNodeScript
   extends Modify<
     Exclude<ParserNode, "classes">,
     {
@@ -110,7 +110,7 @@ interface ParserNodeScript
     }
   > {}
 
-interface ParserNodeStyle
+export interface ParserNodeStyle
   extends Modify<
     Exclude<ParserNode, "classes">,
     {
@@ -119,7 +119,7 @@ interface ParserNodeStyle
     }
   > {}
 
-type ContextDomStageRootBody =
+export type ContextDomStageRootBody =
   | {
       type: "comment" | "template" | "text" | "systag";
       content: string;
