@@ -98,7 +98,8 @@ export interface ParserNode {
   closedTag: string;
   voidTag: boolean;
   attributes: { content: string; name: string; value: string }[];
-  classes?: Set<any>;
+  classes?: Set<string>;
+  content: string;
 }
 
 export interface ParserNodeScript
