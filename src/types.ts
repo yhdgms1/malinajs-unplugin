@@ -175,11 +175,13 @@ export interface ContextJsStage
         watchers: string[];
         imports: [];
         importedNames: [];
+        autosubscribeNames: string[];
         props: [];
         rootVariables: Record<string, boolean>;
         rootFunctions: Record<string, boolean>;
         readOnly: boolean;
         autoimport: {};
+        comments: { start: number; end: number; value: string }[];
         ast: AcornNode;
       };
     }
@@ -244,11 +246,9 @@ export interface ContextCssStage
   > {}
 
 export interface ContextRuntimeBeforeStage extends ContextCssStage {}
-export interface ContextRuntimeStage
-  extends Modify<ContextCssBeforeStage, {}> {}
+export interface ContextRuntimeStage extends ContextCssBeforeStage {}
 
-export interface ContextBuildBeforeStage
-  extends Modify<ContextRuntimeStage, {}> {}
+export interface ContextBuildBeforeStage extends ContextRuntimeStage {}
 export interface ContextBuildStage
   extends Modify<
     ContextBuildBeforeStage,
