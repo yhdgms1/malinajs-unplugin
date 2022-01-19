@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.18
+
+Changed: peerDependency 'malinajs' is set to '\*'
+
 ## 0.0.17
 
 Changed: `enforce` set to 'pre'

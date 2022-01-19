@@ -147,16 +147,20 @@ export type ContextDomStageRootBody =
   | ParserNodeScript
   | ParserNodeStyle;
 
-export interface ContextDomStage extends BaseContext {
-  root: {
-    type: "root";
-    body: ContextDomStageRootBody[];
-  };
-}
+export interface ContextDomStage
+  extends Modify<
+    BaseContext,
+    {
+      DOM: {
+        type: "root";
+        body: ContextDomStageRootBody[];
+      };
+    }
+  > {}
 
 export interface ContextDomCheckStage
   extends Modify<
-    BaseContext,
+    ContextDomStage,
     {
       scriptNodes: ParserNodeScript[];
       styleNodes: ParserNodeStyle[];
