@@ -1,6 +1,6 @@
 {
   "name": "malinajs-unplugin",
-  "version": "0.0.18",
+  "version": "0.1.0",
   "description": "Transform Malina.js files to plain js",
   "type": "module",
   "keywords": [
@@ -38,15 +38,15 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "picomatch": "^2.3.0",
-    "unplugin": "^0.3.0"
+    "picomatch": "^2.3.1",
+    "unplugin": "^0.6.3"
   },
   "devDependencies": {
     "@types/node": "^16.9.4",
     "@types/picomatch": "^2.3.0",
-    "prettier": "^2.5.1",
-    "tsup": "^5.11.9",
-    "typescript": "^4.4.4"
+    "prettier": "^2.6.2",
+    "tsup": "^5.12.8",
+    "typescript": "^4.6.4"
   },
   "peerDependencies": {
     "malinajs": "*"

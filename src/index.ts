@@ -5,14 +5,20 @@ import { createRequire } from "module";
 import picomatch from "picomatch";
 import path from "path";
 
+const CWD = process.cwd();
+
 export const unplugin = createUnplugin<Options>((options) => {
   if (!options) options = {};
 
   if (!options.extensions) options.extensions = ["ma", "xht"];
 
-  const malina = createRequire(import.meta.url)(
-    path.join(process.cwd(), "node_modules", "malinajs")
-  );
+  const require = createRequire(import.meta.url);
+
+  const malinajsPath = require.resolve("malinajs", {
+    paths: [path.join(CWD, "node_modules", "malinajs")],
+  });
+
+  const malina = require(malinajsPath) as Awaited<typeof import("malinajs")>;
 
   if (options.displayVersion) console.log("! Malina.js", malina.version);
 
@@ -31,7 +37,7 @@ export const unplugin = createUnplugin<Options>((options) => {
       }
 
       const globMatches = picomatch.isMatch(id, options.include || [], {
-        cwd: process.cwd(),
+        cwd: CWD,
         ignore: options.exclude || [],
         contains: true,
       });

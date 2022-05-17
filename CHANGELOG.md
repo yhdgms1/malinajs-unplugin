@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.0
+
+Changed: 'unplugin' updated to `0.6.3`
+
+Changed: Try to resolve malinajs using `require.resolve`
+
 ## 0.0.18
 
 Changed: peerDependency 'malinajs' is set to '\*'
