@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.0
+
+Changed: 'unplugin' updated to `1.3.1`
+Changer: `target` updated to `ES2021`
+
 ## 0.1.0
 
 Changed: 'unplugin' updated to `0.6.3`
