@@ -6,13 +6,20 @@ import picomatch from "picomatch";
 import path from "path";
 
 const CWD = process.cwd();
+const __require = (() => {
+  try {
+    return 'resolve' in require && require;
+  } catch {
+    return false;
+  }
+})()
 
 export const unplugin = createUnplugin<Options>((options) => {
   if (!options) options = {};
 
   if (!options.extensions) options.extensions = ["ma", "xht"];
 
-  const require = createRequire(import.meta.url);
+  const require = __require || createRequire(import.meta.url);
 
   const malinajsPath = require.resolve("malinajs", {
     paths: [path.join(CWD, "node_modules", "malinajs")],
